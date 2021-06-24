@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>Remove duplicates DEALERS from JSON based on the values/h1>
+
+        <h3>Dealers With Duplicate Values:</h3><br />
+        <textarea class="dirty">
+[
+    {
+        "whitelistValue": "123"
+    }, 
+    {
+        "whitelistValue": "456"
+    }, 
+    {
+        "whitelistValue": "123"
+    }, 
+    {
+        "whitelistValue": "456"
+    }
+]</textarea><br />
+        <button class="process">REMOVE DUPLICATES</button>
+        <br />
+        Dealers Without Duplicate Values:<br />
+        <textarea class="clean"></textarea>
+
+
+        <style>
+            textarea {
+                width: 800px;
+                height: 300px;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+        <script>
+
+            jQuery(".process").click(function () {
+                var dirty = JSON.parse(jQuery(".dirty").val().trim());
+                var cleaned = removeDuplicates(dirty);
+                console.log(cleaned);
+                jQuery(".clean").val(JSON.stringify(cleaned));
+            });
+
+
+            function removeDuplicates(json_all) {
+                var arr = [],
+                    collection = [];
+
+                $.each(json_all, function (index, value) {
+                    if ($.inArray(value.whitelistValue, arr) == -1) {
+                        arr.push(value.whitelistValue);
+                        collection.push(value);
+                    }
+                });
+                return collection;
+            }
+        </script>
+
+
+</body>
+
+</html>
